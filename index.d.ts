@@ -1,15 +1,21 @@
 import { NativeModulesStatic } from 'react-native';
 
-export const RNCookieManagerIOS: NativeModulesStatic.RNCookieManagerIOS;
-export type RNCookieManagerIOS = NativeModulesStatic.RNCookieManagerIOS;
-
-export const RNCookieManagerAndroid: NativeModulesStatic.RNCookieManagerAndroid;
-export type RNCookieManagerAndroid = NativeModulesStatic.RNCookieManagerAndroid;
-
 export const functions: string[];
 export type functions = string[];
 
+export interface Cookie {
+  name: string;
+  value: string;
+  domain: string;
+  origin: string;
+  path?: string;
+  version?: string;
+}
+
 export const CookieManager: NativeModulesStatic;
 export interface CookieManager {
-  [key: functions]: any;
+  getAll: (useWebKit?: boolean) => Promise<string>;
+  clearAll: (useWebKit?: boolean) => Promise<string>;
+  get: (url: string, useWebKit?: boolean) => Promise<string>;
+  set: (cookie: Cookie, useWebKit?: boolean) => Promise<string>;
 }
